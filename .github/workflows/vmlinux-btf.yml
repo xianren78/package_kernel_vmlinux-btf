@@ -98,7 +98,7 @@ jobs:
           make O=../aarch64_generic olddefconfig
           make O=../aarch64_generic headers_install
           make O=../aarch64_generic -j$(($(nproc) + 1)) vmlinux
-          pahole --btf_encode_detached vmlinux-btf-${{ env.kernel_version }}/vmlinux-${{ env.kernel_version }}-aarch64_generic aarch64_generic/vmlinux
+          pahole --btf_encode_detached ../vmlinux-btf-${{ env.kernel_version }}/vmlinux-${{ env.kernel_version }}-aarch64_generic ../aarch64_generic/vmlinux
 
       - name: Build Kernel vmlinux (x86_64)
         run: |
@@ -112,7 +112,7 @@ jobs:
           make O=../x86_64 olddefconfig
           make O=../x86_64 headers_install
           make O=../x86_64 -j$(($(nproc) + 1)) vmlinux
-          pahole --btf_encode_detached vmlinux-btf-${{ env.kernel_version }}/vmlinux-${{ env.kernel_version }}-x86_64 x86_64/vmlinux
+          pahole --btf_encode_detached ../vmlinux-btf-${{ env.kernel_version }}/vmlinux-${{ env.kernel_version }}-x86_64 ../x86_64/vmlinux
 
       - name: Package vmlinux btf file
         run: |
