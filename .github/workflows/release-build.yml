@@ -81,12 +81,13 @@ jobs:
             tar -zcvf ${{ matrix.sdk }}-${{ matrix.arch }}.tar.gz -C bin/packages/${{ matrix.arch }}/ packages_ci
           fi
 
-      - name: Upload packages
-        uses: ncipollo/release-action@v1
+      - name: Create release
+        uses: ncipollo/release-action@v1.20.0
         with:
           name: ${{ matrix.sdk }}
-          token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
+          tag: ${{ matrix.sdk }}
+          commit: main
           replacesArtifacts: true
-          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: "${{ matrix.sdk }}-${{ matrix.arch }}.tar.gz"
